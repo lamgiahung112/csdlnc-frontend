@@ -64,9 +64,6 @@ function Filter() {
 					onChange={(e) => filterOptions.setPageSize(+e.target.value)}
 				/>
 			</div>
-			<div className="flex items-center px-2 rounded bg-neutral-500">
-				+ Add Product
-			</div>
 		</div>
 	)
 }

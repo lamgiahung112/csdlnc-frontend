@@ -4,7 +4,7 @@ import modalStore from "./stores/modalStore"
 import UpdateProductForm from "./UpdateProductForm"
 
 function Table() {
-	const { data } = useStore(productSnapshotStore)
+	const data = useStore(productSnapshotStore, (store) => store.data)
 	const open = useStore(modalStore, (store) => store.open)
 	return (
 		<div className="flex flex-col px-[10%]">
