@@ -1,94 +1,71 @@
 import { useStore } from "@lamgiahung112/react-simple-store"
-import stockFilterStore from "./stores/stockFilterStore"
+import productFilterStore from "./stores/productFilterStore"
 
 function Filter() {
-	const filterOptions = useStore(stockFilterStore)
+	const filterOptions = useStore(productFilterStore)
 	return (
 		<div className="flex gap-x-4 px-8">
 			<div className="flex flex-col">
-				<label htmlFor="from">From:</label>
+				<label htmlFor="name">Product Name:</label>
 				<input
-					className="text-black h-8"
-					id="from"
-					type="date"
-					onChange={(e) => filterOptions.setFromDate(e.target.value)}
+					min={0}
+					className="text-black h-8 caret-black p-2 outline-none"
+					id="name"
+					onChange={(e) => filterOptions.setName(e.target.value)}
 				/>
 			</div>
 			<div className="flex flex-col">
-				<label htmlFor="to">To:</label>
+				<label htmlFor="cat">Category:</label>
 				<input
-					className="text-black h-8"
-					id="to"
-					type="date"
-					onChange={(e) => filterOptions.setToDate(e.target.value)}
+					min={0}
+					className="text-black h-8 caret-black p-2 outline-none"
+					id="cat"
+					onChange={(e) => filterOptions.setCategory(e.target.value)}
 				/>
 			</div>
 			<div className="flex flex-col">
-				<label htmlFor="points">Number of points:</label>
+				<label htmlFor="color">Color:</label>
+				<input
+					min={0}
+					className="text-black h-8 caret-black p-2 outline-none"
+					id="color"
+					onChange={(e) => filterOptions.setColor(e.target.value)}
+				/>
+			</div>
+			<div className="flex flex-col">
+				<label htmlFor="year">Year:</label>
+				<input
+					min={0}
+					className="text-black h-8 caret-black p-2 outline-none"
+					id="year"
+					onChange={(e) => filterOptions.setYear(e.target.value)}
+				/>
+			</div>
+			<div className="flex gap-x-4 items-end ml-8 mr-8">
+				<button onClick={filterOptions.decrementPage}>Previous</button>
 				<input
 					min={1}
-					className="text-black h-8"
-					id="points"
+					className="text-black h-8 caret-black p-2 outline-none"
+					id="page"
 					type="number"
-					required
+					defaultValue={filterOptions.page}
+					onChange={(e) => filterOptions.goToPage(+e.target.value)}
+				/>
+				<button onClick={filterOptions.incrementPage}>Next</button>
+			</div>
+			<div className="flex flex-col">
+				<label htmlFor="rec">Number of records:</label>
+				<input
+					min={1}
+					className="text-black h-8 caret-black p-2 outline-none"
+					id="rec"
+					type="number"
 					defaultValue={filterOptions.pageSize}
 					onChange={(e) => filterOptions.setPageSize(+e.target.value)}
 				/>
 			</div>
-			<div className="flex flex-col">
-				<label htmlFor="high">High:</label>
-				<input
-					min={0}
-					className="text-black h-8"
-					id="high"
-					type="checkbox"
-					defaultValue={filterOptions.labels.high ? "checked" : ""}
-					onChange={(e) => filterOptions.setLabel("high", e.target.checked)}
-				/>
-			</div>
-			<div className="flex flex-col">
-				<label htmlFor="low">Low:</label>
-				<input
-					min={0}
-					className="text-black h-8"
-					id="low"
-					type="checkbox"
-					defaultValue={filterOptions.labels.low ? "checked" : ""}
-					onChange={(e) => filterOptions.setLabel("low", e.target.checked)}
-				/>
-			</div>
-			<div className="flex flex-col">
-				<label htmlFor="open">Open:</label>
-				<input
-					min={0}
-					className="text-black h-8"
-					id="open"
-					type="checkbox"
-					defaultValue={filterOptions.labels.open ? "checked" : ""}
-					onChange={(e) => filterOptions.setLabel("open", e.target.checked)}
-				/>
-			</div>
-			<div className="flex flex-col">
-				<label htmlFor="close">Close:</label>
-				<input
-					min={0}
-					className="text-black h-8"
-					id="close"
-					type="checkbox"
-					defaultValue={filterOptions.labels.close ? "checked" : ""}
-					onChange={(e) => filterOptions.setLabel("close", e.target.checked)}
-				/>
-			</div>
-			<div className="flex flex-col">
-				<label htmlFor="volume">Volume:</label>
-				<input
-					min={0}
-					className="text-black h-8"
-					id="volume"
-					type="checkbox"
-					defaultValue={filterOptions.labels.volume ? "checked" : ""}
-					onChange={(e) => filterOptions.setLabel("volume", e.target.checked)}
-				/>
+			<div className="flex items-center px-2 rounded bg-neutral-500">
+				+ Add Product
 			</div>
 		</div>
 	)

@@ -1,35 +1,45 @@
-declare interface StockSnapshot {
-	date: string
-	open: number
-	close: number
-	high: number
-	low: number
-	adjClose: number
-	volume: number
+declare interface Product {
+	id: string
+	gender: string
+	masterCategory: string
+	subCategory: string
+	articleType: string
+	baseColour: string
+	season: string
+	year: string
+	usage: string
+	productDisplayName: string
 }
 
-declare type StockSnapshotStoreProps = {
-	data: StockSnapshot[]
-	fetchSnapshots(options: StockSnapshotOptions): void
+declare type ProductSnapshotStoreProps = {
+	data: Product[]
+	fetchSnapshots(options: ProductOptions): void
 }
 
-declare type StockSnapshotOptions = {
-	fromDate?: string
-	toDate?: string
+declare type ProductOptions = {
+	page: number
 	pageSize: number
-	labels: {
-		open: boolean
-		close: boolean
-		high: boolean
-		low: boolean
-		adjClose: boolean
-		volume: boolean
-	}
+	category: string | null
+	color: string | null
+	year: string | null
+	name: string | null
 }
 
-declare type StockFilterStoreProps = StockSnapshotOptions & {
-	setPageSize(pgSize: number)
-	setFromDate(date?: string)
-	setToDate(date?: string)
-	setLabel(label: "open" | "close" | "high" | "low" | "volume", value: boolean)
+declare type ProductFilterStoreProps = ProductOptions & {
+	incrementPage(): void
+	decrementPage(): void
+	goToPage(page: number): void
+	setPageSize(sz: number): void
+	setCategory(value: string): void
+	setYear(value: string): void
+	setName(value: string): void
+	setColor(value: string): void
+}
+
+declare type ModalStore = {
+	isOpen: boolean
+	title?: string
+	component?: React.JSX.Element
+	open(options: { component: React.JSX.Element; title: string }): void
+	close(): void
 }

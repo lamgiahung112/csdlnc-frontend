@@ -1,23 +1,24 @@
 import { useStore } from "@lamgiahung112/react-simple-store"
-import stockFilterStore from "./stores/stockFilterStore"
+import productFilterStore from "./stores/productFilterStore"
 import { useEffect } from "react"
-import stockSnapshotStore from "./stores/stockSnapshotStore"
-import StockChart from "./StockChart"
+import productSnapshotStore from "./stores/productSnapshotStore"
 import Filter from "./Filter"
+import Table from "./Table"
+import Modal from "./Modal"
 
 function App() {
-	const filterOptions = useStore(stockFilterStore)
-	const { fetchSnapshots } = useStore(stockSnapshotStore)
+	const filterOptions = useStore(productFilterStore)
+	const { fetchSnapshots } = useStore(productSnapshotStore)
 
 	useEffect(() => {
 		fetchSnapshots(filterOptions)
-	}, [filterOptions.pageSize, filterOptions.toDate, filterOptions.fromDate])
+	}, [filterOptions])
 
 	return (
-		<div className="flex flex-col gap-y-8 min-w-full h-screen max-w-[100vw] bg-neutral-700 text-white">
-			<div className="text-7xl font-medium">Google Stock Prices</div>
+		<div className="flex flex-col gap-y-8 min-w-full h-screen overflow-x-auto max-w-[100vw] bg-neutral-800 text-white">
 			<Filter />
-			<StockChart />
+			<Table />
+			<Modal />
 		</div>
 	)
 }
